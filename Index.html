@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack | Household Carbon Calculator</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #95d5b2;
+            --bg: #f8fbf9;
+            --card: #ffffff;
+            --text: #1b4332;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 { color: var(--primary); text-align: center; margin-bottom: 0.5rem; }
+        p.subtitle { text-align: center; color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
+
+        .input-group { margin-bottom: 1.5rem; }
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--primary); }
+
+        .result-card {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        #total-emissions { font-size: 2.5rem; font-weight: bold; display: block; }
+        .unit { font-size: 1rem; opacity: 0.9; }
+
+        .footer-note { font-size: 0.8rem; color: #888; margin-top: 1.5rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>EcoTrack</h1>
+    <p class="subtitle">Calculate your household carbon footprint</p>
+
+    <div class="input-group">
+        <label>Electricity Usage (kWh)</label>
+        <input type="number" id="elec" placeholder="e.g. 150" oninput="calculate()">
+    </div>
+
+    <div class="input-group">
+        <label>Waste Generated (kg)</label>
+        <input type="number" id="waste" placeholder="e.g. 10" oninput="calculate()">
+    </div>
+
+    <div class="input-group">
+        <label>Water Consumption (Liters)</label>
+        <input type="number" id="water" placeholder="e.g. 1000" oninput="calculate()">
+    </div>
+
+    <div class="input-group">
+        <label>Calculation Period</label>
+        <select id="period" onchange="calculate()">
+            <option value="1">Per Day</option>
+            <option value="7">Per Week</option>
+            <option value="30">Per Month</option>
+            <option value="365">Per Year</option>
+        </select>
+    </div>
+
+    <div class="result-card">
+        <span id="total-emissions">0.00</span>
+        <span class="unit">kg of $CO_{2}$e Generated</span>
+    </div>
+
+    <p class="footer-note">Calculated using 2026 standard emission factors.</p>
+</div>
+
+<script>
+    function calculate() {
+        // Emission Factors
+        const factorElec = 0.385; // kg CO2 per kWh
+        const factorWaste = 0.52; // kg CO2 per kg
+        const factorWater = 0.0003; // kg CO2 per Liter
+
+        // Get Inputs
+        const elec = parseFloat(document.getElementById('elec').value) || 0;
+        const waste = parseFloat(document.getElementById('waste').value) || 0;
+        const water = parseFloat(document.getElementById('water').value) || 0;
+        const period = parseFloat(document.getElementById('period').value);
+
+        // Core Calculation
+        const total = (
+            (elec * factorElec) + 
+            (waste * factorWaste) + 
+            (water * factorWater)
+        ) * period;
+
+        // Update Display
+        document.getElementById('total-emissions').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+</script>
+
+</body>
+</html>
