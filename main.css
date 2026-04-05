@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 1px;
+    border-color: black;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 19px;
+    /* border-style: solid; */
+    background-color: rgb(240, 240, 240);
+}
+
+h1{
+    font-family: 'DM Serif Display', serif;
+    font-size: 45px;
+}
+h2{
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+}
+
+h3{
+    font-family: 'DM Serif Display', serif;
+    font-size: 25px;
+}
+
+
+
+header #nav{
+    margin-top: 25px;
+    font-size: 17px;
+    background-color: rgb(255, 255, 255);
+    height: 35px;
+    line-height: 35px;
+    padding-left: 20px;
+}
+header #nav a{
+    padding-left: 30px;
+    background-color:rgb(255, 255, 255);
+}
+header #title {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+
+
+input {
+    width: 100%;
+    text-align: right;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(78, 156, 72);
+}
+
+select {
+    width: 100%;
+    text-align: right;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(78, 156, 72);
+}
+
+#container{
+    max-width: 60%;
+    margin: auto;
+    padding: 32px 16px 0; 
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.card{
+    /* border-width: 1px;
+    border-color: black;
+    border-style:solid; */
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card p{
+    color: rgb(128, 128, 128);
+    font-size: 15px;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.card .field{
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.divider { height: 1px; background: #343434; margin: 4px 0; }
+
+
+
+#right{
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.used_unit{
+    text-align: right;
+}
+
+.calc_cards{
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.emission_title{
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.emission_value{
+    text-align: right;
+}
+
+#right p{
+    color: rgb(128, 128, 128);
+    font-size: 15px;
+    margin-left: 10px;
+    font-style: italic;
+}
