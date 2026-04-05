@@ -10,10 +10,10 @@
     
     <body>
         <header>
-            <div id="nav">
+            <!-- <div id="nav">
                 <a href="index.html">Home</a>
                 <a href="student.html">About</a>
-            </div>
+            </div> -->
             <div id="title">
                 <H1>Household Carbon Calculator</H1>
                 <p>In Partial Fulfillment of the Requirements for Environmental Science course.</p>
@@ -347,9 +347,25 @@
 
         </div>
     </body>
-
+    <br>
     <footer>
-        HOme
+        <div>
+            <h3>References</h3>
+            <ul>
+                <li><a href="https://www.climate-transparency.org/wp-content/uploads/2021/01/Philippines-CT-2020.pdf">https://www.climate-transparency.org/wp-content/uploads/2021/01/Philippines-CT-2020.pdf</a></li>
+                <li><a href="https://ghgprotocol.org/calculation-tools-and-guidance">https://ghgprotocol.org/calculation-tools-and-guidance</a></li>
+                <li><a href="https://www.epa.gov/sites/default/files/2016-03/documents/stationaryemissions_3_2016.pdf">https://www.epa.gov/sites/default/files/2016-03/documents/stationaryemissions_3_2016.pdf</a></li>
+                <li><a href="https://niccdies.climate.gov.ph/greenhouse-gas-emissions-from-waste">https://niccdies.climate.gov.ph/greenhouse-gas-emissions-from-waste</a></li>
+                <li><a href="https://ndlindustries.com/refrigerant-table/">https://ndlindustries.com/refrigerant-table/</a></li>
+            </ul>
+
+            <h3>Group Members:</h3>
+                <span>Acosta</span>
+                <span>Austria</span>
+                <span>Caburnay</span>
+                <span>Mabaylan</span>
+                <p>EE3A</p>
+        </div>
     </footer>
 
     <script>
@@ -488,12 +504,12 @@
         // Values ac
         var acUnit = document.getElementById('used_ACunit').value;
         var acCharge = document.getElementById('used_ACquality').value;
-        var acleakage = document.getElementById('used_ACleakage').value;
+        var acleakage = document.getElementById('used_ACleakage').value / 100;
 
         // Values REF
         var refUnit = document.getElementById('used_REFunit').value;
         var refCharge = document.getElementById('used_REFquality').value;
-        var refleakage = document.getElementById('used_REFleakage').value;
+        var refleakage = document.getElementById('used_REFleakage').value / 100;
 
         // Results Element
         var res_elec = document.getElementById('res_elec');
