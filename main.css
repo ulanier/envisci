@@ -148,3 +148,74 @@ select {
 }
 
 .chip.active { background: #4A7C59;; border-color: #4A7C59;; color: #fff; }
+
+
+
+@media (max-width: 480px) {
+    h1{
+        font-family: 'DM Serif Display', serif;
+        font-size: 30px;
+    }
+    h2{
+        font-family: 'DM Serif Display', serif;
+        font-size: 22px;
+    }
+
+    h3{
+        font-family: 'DM Serif Display', serif;
+        font-size: 17px;
+    }
+
+    #container{
+    max-width: 100%;
+    margin: auto;
+    padding: 16px 8px 0; 
+    display: grid;
+    grid-template-columns: 60% 40%;
+    }
+    label{
+        font-size: 12px;
+        line-height: 1;
+    }
+    
+    .card{
+        /* border-width: 1px;
+        border-color: black;
+        border-style:solid; */
+        margin-top: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .card p{
+        color: rgb(128, 128, 128);
+        font-size: 11px;
+        margin-left: 5px;
+        font-style: italic;
+    }
+
+    .card .field{
+        display: grid;
+        grid-template-columns: 75% 25%;
+    }
+
+    .divider { height: 1px; background: #343434; margin: 4px 0; }
+
+    #right{
+    margin-left: 8px;
+    padding: 10px;
+    }   
+
+    input {
+    width: 100%;
+    text-align: right;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(78, 156, 72);
+    }
+    .used_unit{
+    text-align: right;
+    font-size: 5px;
+    }
+}
