@@ -95,7 +95,7 @@ select {
     grid-template-columns: 60% 40%;
 }
 
-.divider { height: 1px; background: #343434; margin: 4px 0; }
+.divider { height: 1px; background: #343434; margin: 8px 0; }
 
 
 
@@ -128,3 +128,23 @@ select {
     margin-left: 10px;
     font-style: italic;
 }
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.chip {
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: .82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    background: var(--bg);
+    color: var(--muted);
+    user-select: none;
+    
+}
+
+.chip.active { background: #4A7C59;; border-color: #4A7C59;; color: #fff; }

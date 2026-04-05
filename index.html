@@ -74,21 +74,21 @@
                         </div>
                         <div class="field_input">
                             <select name="fuel_type" id="fuel_type" onchange="updateFuelUI()">
-                                <option value="lpg">LPG</option>
-                                <option value="coal">Coal</option>
-                                <option value="firewood">Firewood</option>
-                                <option value="electric">Electric</option>
-                                <option value="none">None</option>
+                                <option value="LPG">LPG</option>
+                                <option value="Coal">Coal</option>
+                                <option value="Firewood">Firewood</option>
+                                <option value="Electric">Electric</option>
+                                <option value="None">None</option>
                             </select>
                         </div>
                     </div>
                     <div class="field">
                         <div class="field_text" id="fuel-amount-wrap">
-                            <label id="fuel-label">LPG cylinders used per month: <p>2.9846kg CO2 / 1kg LPG</p></label>
+                            <label id="fuel-label">Kilogram LPG used per month: <p>2.9846kg CO2 / 1kg LPG</p></label>
                         </div>
                         <div class="field_input">
-                            <input type="number" id="used_fuel_amount", min="1", value="1", oninput="Calculate()">
-                            <p class="used_unit" id="fuel-unit">cylinder / month</p>
+                            <input type="number" id="used_fuel_amount", min="0", value="1", oninput="Calculate()">
+                            <p class="used_unit" id="fuel-unit">kg / month</p>
                         </div>
                     </div>
                         
@@ -280,52 +280,131 @@
             <div id="right">
                 <H2>Total Emission</H2>
                 <div class="divider"></div>
+                <div class="chip_group">
+                    <span class="chip", id="per_year", onclick="time_fact('yearly')">Yearly</span>
+                    <span class="chip active", id="per_month", onclick="time_fact('monthly')">Monthly</span>
+                    <span class="chip", id="per_day", onclick="time_fact('daily')">daily</span>
+                </div>
+                <div class="divider"></div>
+                <div class="chip_group">
+                    <span class="chip active", id="per_person", onclick="pers_fact('person')">Person</span>
+                    <span class="chip", id="per_household", onclick="pers_fact('house')">Household</span>
+                </div>
+                <div class="divider"></div>
+
                 <h3>Electricity:</h3>
                 <p>Emission factor : 0.691kg CO2 / kWh</p>
                 <div class="calc_cards">
                     <span class="emission_title">Electicity Emission:</span>
                     <span class="emission_value" id="res_elec"></span>
-                    <span class="emission_title"></span>
                 </div>
 
+                <h3>Cooking Energy:</h3>
+                <p id="fuel_emission">Emission factor (LPG): 0.691kg CO2 / kWh</p>
+                <div class="calc_cards">
+                    <span class="emission_title">Electicity Emission:</span>
+                    <span class="emission_value" id="res_fuel"></span>
+                </div>
+
+                <h3>Water Usage:</h3>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <div class="calc_cards">
+                    <span class="emission_title">Water Usage Emission:</span>
+                    <span class="emission_value" id="res_water"></span>
+                </div>
+
+                <h3>Solid Waste:</h3>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <div class="calc_cards">
+                    <span class="emission_title">Solid Waste Emission:</span>
+                    <span class="emission_value" id="res_solid"></span>
+                </div>
+
+                <h3>Air Conditioning:</h3>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <div class="calc_cards">
+                    <span class="emission_title">Air Conditioning Emission:</span>
+                    <span class="emission_value" id="res_ac"></span>
+                </div>
+
+                <h3>Refrigirator:</h3>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <div class="calc_cards">
+                    <span class="emission_title">Refrigirator Emission:</span>
+                    <span class="emission_value" id="res_ref"></span>
+                </div>
+
+                <div class="divider"></div>
+
+                <h3>Total Amount:</h3>
+                <div class="calc_cards">
+                    <span class="emission_title">Total Emission:</span>
+                    <span class="emission_value" id="res_total"></span>
+                </div>
+
+                <div class="divider"></div>
             </div>
 
         </div>
     </body>
 
+    <footer>
+        HOme
+    </footer>
+
     <script>
+
+    var time_factor = 1;
+    var household = false;
+    var cooking_factor = 2.9846;
+    const fac_elec = 0.691;
+    const fac_water = 0.5
+    const fac_solid = 0.5
+    var acGWP = 1810;
+    var refGWP = 3;
+
     function updateFuelUI() {
         var v = document.getElementById('fuel_type').value;
         var fw = document.getElementById('fuel-amount-wrap');
         var lbl = document.getElementById('fuel-label');
         var unt = document.getElementById('fuel-unit');
         var inp = document.getElementById('used_fuel_amount');
-        if (v === 'none') {
+        var fuel_emis = document.getElementById('fuel_emission');
+
+        if (v === 'None') {
         fw.style.display = '';
         lbl.innerHTML = 'No form of cooking fuel.';
         unt.textContent = 'N.A./month';
         inp.value = 0;
-        } else if (v === 'lpg') {
+        cooking_factor = 0;
+        } else if (v === 'LPG') {
         fw.style.display = '';
-        lbl.innerHTML = 'LPG cylinders used per month: <p>2.9846kg CO2 / 1kg LPG</p>';
-        unt.textContent = 'cylinders / month';
+        lbl.innerHTML = 'Kilogram LPG used per month: <p>2.9846kg CO2 / 1kg LPG</p>';
+        unt.textContent = 'kg / month';
         inp.value = 1;
-        } else if (v === 'coal') {
+        cooking_factor = 2.9846;
+        } else if (v === 'Coal') {
         fw.style.display = '';
         lbl.innerHTML = 'Kilograms of Coal used per month: <p>3.304kg CO2 / 1kg Coal</p>';
         unt.textContent = 'kg / month';
         inp.value = 20;
-        } else if (v === 'firewood') {
+        cooking_factor = 3.304;
+        } else if (v === 'Firewood') {
         fw.style.display = '';
         lbl.innerHTML = 'Kilograms of Firewood used per month: <p>1.8078kg CO2 / 1kg Firewood</p>';
         unt.textContent = 'kg / month';
         inp.value = 20;
-        } else if (v === 'electric') {
+        cooking_factor = 1.8078;
+        } else if (v === 'Electric') {
         fw.style.display = '';
         lbl.innerHTML = 'Already included in Electricity Calculation: <p>0.691kg CO2 / 1kWh</p>';
         unt.textContent = 'kWh / month';
-        inp.value = 1;
+        inp.value = 0;
+        cooking_factor = 0;
         }
+
+        Calculate();
+        fuel_emis.textContent = 'Emission factor ' +(v)+': '+cooking_factor+'kg CO2 / kWh'
     }
 
     function updateACRefrigirant() {
@@ -334,13 +413,18 @@
         var GPW = document.getElementById('used_ACGWP');
         if (v === 'none'){
             GPW.textContent = "N/A";
+            acGWP = 0;
         }else if (v === 'r22') {
             GPW.textContent = 1810;
+            acGWP = 1810;
         }else if (v === 'r410a') {
             GPW.textContent = 2088;
+            acGWP = 2088;
         }else if (v === 'r32') {
             GPW.textContent = 675;
+            acGWP = 675;
         }
+        Calculate();
     }
     
     function updateREFRefrigirant() {
@@ -349,20 +433,102 @@
         var GPW = document.getElementById('used_REFGWP');
         if (v === 'none'){
             GPW.textContent = "N/A";
+            refGWP = 0;
         }else if (v === 'r134a') {
             GPW.textContent = 1430;
+            refGWP = 1430;
         }else if (v === 'r600a') {
             GPW.textContent = 3;
+            refGWP = 3;
         }
+        Calculate();
     }
     
+    function time_fact(val) {
+        if (val === 'yearly'){
+            document.getElementById('per_year').classList.toggle('active', true);
+            document.getElementById('per_month').classList.toggle('active', false);
+            document.getElementById('per_day').classList.toggle('active', false);
+            time_factor = 12;
+        }else if (val === 'monthly'){
+            document.getElementById('per_year').classList.toggle('active', false);
+            document.getElementById('per_month').classList.toggle('active', true);
+            document.getElementById('per_day').classList.toggle('active', false);
+            time_factor = 1;
+        }else if (val === 'daily'){
+            document.getElementById('per_year').classList.toggle('active', false);
+            document.getElementById('per_month').classList.toggle('active', false);
+            document.getElementById('per_day').classList.toggle('active', true);
+            time_factor = 1/30;
+        }
+        Calculate();
+    }
+
+    function pers_fact(val) {
+        if (val === 'house'){
+            document.getElementById('per_person').classList.toggle('active', false);
+            document.getElementById('per_household').classList.toggle('active', true);
+            household = true;
+        }else if (val === 'person'){
+            document.getElementById('per_person').classList.toggle('active', true);
+            document.getElementById('per_household').classList.toggle('active', false);
+            household = false;
+        }
+        Calculate();
+    }
+
     function Calculate() {
         // Values Element
+        var pers = document.getElementById('people').value;
         var elec = document.getElementById('used_electricity').value;
+        var fuel = document.getElementById('used_fuel_amount').value;
+        var water = document.getElementById('used_water').value;
+        var solid = document.getElementById('used_solid_waste').value;
+
+        // Values ac
+        var acUnit = document.getElementById('used_ACunit').value;
+        var acCharge = document.getElementById('used_ACquality').value;
+        var acleakage = document.getElementById('used_ACleakage').value;
+
+        // Values REF
+        var refUnit = document.getElementById('used_REFunit').value;
+        var refCharge = document.getElementById('used_REFquality').value;
+        var refleakage = document.getElementById('used_REFleakage').value;
+
         // Results Element
-        var res_elec = document.getElementById('res_elec')
-        const fac_elec = 0.691;
-        res_elec.textContent =Math.round(fac_elec * elec * 10000) / 10000 + ' kg CO2';
+        var res_elec = document.getElementById('res_elec');
+        var res_fuel = document.getElementById('res_fuel');
+        var res_water = document.getElementById('res_water');
+        var res_solid = document.getElementById('res_solid');
+        var res_ac = document.getElementById('res_ac');
+        var res_ref = document.getElementById('res_ref');
+        var res_tot = document.getElementById('res_total');
+
+        if (household == false){
+        var res_elec_val = Math.round((fac_elec * elec * time_factor / pers) * 10000) / 10000;
+        var res_fuel_val = Math.round((cooking_factor * fuel * time_factor / pers) *10000) / 10000;
+        var res_water_val = Math.round((fac_water * water * time_factor / pers) *10000) / 10000;
+        var res_solid_val = Math.round((fac_water * solid * time_factor / pers) *10000) / 10000;
+        var res_ac_val = Math.round((acGWP * acCharge * acUnit * acleakage * time_factor / pers / 12)*10000) / 10000;
+        var res_ref_val = Math.round((refGWP * refCharge * refUnit * refleakage * time_factor / pers / 12)*10000) / 10000;  
+        }else{
+        var res_elec_val = Math.round((fac_elec * elec * time_factor) * 10000) / 10000;
+        var res_fuel_val = Math.round((cooking_factor * fuel * time_factor) *10000) / 10000;
+        var res_water_val = Math.round((fac_water * water * time_factor) *10000) / 10000;
+        var res_solid_val = Math.round((fac_water * solid * time_factor) *10000) / 10000;
+        var res_ac_val = Math.round((acGWP * acCharge * acUnit * acleakage * time_factor/ 12)*10000) / 10000;
+        var res_ref_val = Math.round((refGWP * refCharge * refUnit * refleakage * time_factor/ 12)*10000) / 10000;
+        }
+        res_elec.textContent = res_elec_val  + ' kg CO2';
+        res_fuel.textContent = res_fuel_val  + ' kg CO2';
+        res_water.textContent = res_water_val  + ' kg CO2';
+        res_solid.textContent = res_solid_val  + ' kg CO2';
+        res_ac.textContent = res_ac_val  + ' kg CO2';
+        res_ref.textContent = res_ref_val  + ' kg CO2';  
+
+        res_tot.textContent = Math.round((res_elec_val + res_fuel_val + res_water_val + res_solid_val + res_ac_val + res_ref_val) * 10000) / 10000;
+
+
     }
     </script>
 </html>
