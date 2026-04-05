@@ -149,23 +149,46 @@ select {
 
 .chip.active { background: #4A7C59;; border-color: #4A7C59;; color: #fff; }
 
-footer{
-    width: 100%;
-    height: 100px;
-    padding: 50px;
+footer div div{
+    padding: 20px;
+    background-color: #d5ebd5;
+}
+footer div h3{
+    padding: 5px;
+    background: none;
 }
 
 footer li{
     font-size: 12px;
+    background-color: #d5ebd5;
+    list-style-type: none;
 }
+
 footer a{
     font-size: 12px;
+    color: rgb(78, 156, 72);
+    background: none;
+    margin: 20px;
 }
+
+footer a:visited{
+    font-size: 12px;
+    color: rgb(1, 70, 16);
+    margin: 10px;
+}
+
 footer span{
     font-size: 15px;
+    background: none;
 }
 footer p{
     font-size: 15px;
+    background: none;
+}
+
+.foot_container{
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 @media (max-width: 480px) {
