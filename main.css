@@ -163,7 +163,7 @@ select {
 
     h3{
         font-family: 'DM Serif Display', serif;
-        font-size: 17px;
+        font-size: 15px;
     }
 
     #container{
@@ -182,7 +182,7 @@ select {
         /* border-width: 1px;
         border-color: black;
         border-style:solid; */
-        margin-top: 25px;
+        margin-bottom: 25px;
         padding-left: 5px;
         padding-right: 5px;
     }
@@ -235,5 +235,45 @@ select {
 
     #left span{
         font-size: 12px;
+    }
+    
+    .calc_cards{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .emission_title{
+        font-size: 9px;
+        margin-left: 5px;
+    }
+
+    .emission_value{
+        text-align: right;
+        font-size: 11px;
+    }
+
+    #right p{
+        color: rgb(128, 128, 128);
+        font-size: 10px;
+        margin-left: 5px;
+        font-style: italic;
+    }
+
+    .chip-group {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .chip {
+        padding: 3px 7px;
+        border-radius: 7px;
+        border: 1px solid #E2E0DA;
+        font-size: .50rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .15s;
+        background: var(--bg);
+        color: var(--muted);
+        user-select: none;
+        
     }
 }
