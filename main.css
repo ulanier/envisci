@@ -47,7 +47,6 @@ header #title {
 }
 
 
-
 input {
     width: 100%;
     text-align: right;
@@ -190,6 +189,16 @@ footer p{
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
+
+#title h1{
+    background-color: #d5ebd5;
+}
+
+#title p{
+    background-color: #d5ebd5;
+}
+
 
 @media (max-width: 480px) {
     h1{

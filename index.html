@@ -31,7 +31,7 @@
                     <div class="field">
                         <div class="field_text">
                             <label for="people">How many people in your household:</label>
-                            <p>Used to calculate your per-person footprint.</p>
+                            <p>Carbon Emission share per person.</p>
                         </div>
                         <div class="field_input">
                             <input type="number" id="people", min="1", value="1", oninput="Calculate()">
@@ -123,7 +123,7 @@
                     <div class="field">
                         <div class="field_text">
                             <label for="used_electricity">Monthly Solid Waste Generated:</label>
-                            <p>Check your water bill.</p>
+                            <p>Estimate solid waste generated.</p>
                         </div>
                         <div class="field_input">
                             <input type="number" id="used_solid_waste", min="1", value="50", oninput="Calculate()">
@@ -259,7 +259,7 @@
                     <div class="field">
                         <div class="field_text">
                             <label for="used_REFleakage">Leakage:</label>
-                            <p>Average: 7.5%</p>
+                            <p>Average: 1.5%</p>
                         </div>
                         <div class="field_input">
                             <input type="number" id="used_REFleakage", min="1", value="1.5", max="3", oninput="Calculate()">
@@ -268,12 +268,6 @@
                     </div>
 
                 </div>
-
-                <div class="divider"></div>
-
-                <!-- <div id="calcButt">
-                    <button onclick="Calculate()">Calculate</button>
-                </div> -->
             </div>
 
 
@@ -300,21 +294,21 @@
                 </div>
 
                 <h3>Cooking Energy:</h3>
-                <p id="fuel_emission">Emission factor (LPG): 0.691kg CO2 / kWh</p>
+                <p id="fuel_emission">Emission factor (LPG): 0.691kg CO2 / kg</p>
                 <div class="calc_cards">
                     <span class="emission_title">Electicity Emission:</span>
                     <span class="emission_value" id="res_fuel"></span>
                 </div>
 
                 <h3>Water Usage:</h3>
-                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / Cubic meter</p>
                 <div class="calc_cards">
                     <span class="emission_title">Water Usage Emission:</span>
                     <span class="emission_value" id="res_water"></span>
                 </div>
 
                 <h3>Solid Waste:</h3>
-                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kWh</p>
+                <p id="fuel_emission">Emission factor: 0.5kg CO2 / kg</p>
                 <div class="calc_cards">
                     <span class="emission_title">Solid Waste Emission:</span>
                     <span class="emission_value" id="res_solid"></span>
@@ -341,8 +335,6 @@
                     <span class="emission_title">Total Emission:</span>
                     <span class="emission_value" id="res_total"></span>
                 </div>
-
-                <div class="divider"></div>
             </div>
 
         </div>
@@ -429,7 +421,7 @@
         }
 
         Calculate();
-        fuel_emis.textContent = 'Emission factor ' +(v)+': '+cooking_factor+'kg CO2 / kWh'
+        fuel_emis.textContent = 'Emission factor ' +(v)+': '+cooking_factor+'kg CO2 / kg'
     }
 
     function updateACRefrigirant() {
