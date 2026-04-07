@@ -322,7 +322,7 @@
                 </div>
 
                 <h3>Refrigirator:</h3>
-                <p id="fuel_emission">Varies for different Refrigirant</p>
+                <p id="fuel_emission">Emission factor: Varies for different Refrigirant</p>
                 <div class="calc_cards">
                     <span class="emission_title">Refrigirator Emission:</span>
                     <span class="emission_value" id="res_ref"></span>
@@ -370,6 +370,10 @@
     </footer>
 
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    Calculate();
+    });
+
 
     var time_factor = 1;
     var household = false;
@@ -543,7 +547,7 @@
         res_ac.textContent = res_ac_val  + ' kg CO2';
         res_ref.textContent = res_ref_val  + ' kg CO2';  
 
-        res_tot.textContent = Math.round((res_elec_val + res_fuel_val + res_water_val + res_solid_val + res_ac_val + res_ref_val) * 10000) / 10000;
+        res_tot.textContent = Math.round((res_elec_val + res_fuel_val + res_water_val + res_solid_val + res_ac_val + res_ref_val) * 10000) / 10000 + " kg CO2";
 
 
     }
